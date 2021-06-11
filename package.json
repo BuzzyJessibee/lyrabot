@@ -1,0 +1,20 @@
+{
+  "name": "lyrabot",
+  "version": "3.0.0",
+  "description": "A piece of Lyra's Soul",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lyrasaurus Rose",
+  "license": "",
+  "dependencies": {
+    "@discordjs/opus": "^0.5.3",
+    "canvacord": "^5.2.1",
+    "discord-music-player": "^7.1.4",
+    "discord-paginationembed": "^2.1.0",
+    "discord-xp": "^1.1.14",
+    "discord.js": "^12.5.3",
+    "discord.js-commando": "^0.12.3"
+  }
+}
