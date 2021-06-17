@@ -10,3 +10,7 @@ This bot was written with Discord.js + Commando and uses:
 - discord-xp
 
 This bot was created for fun for me to learn Node JavaScript and just has a bunch of random features that I thought were cool.
+
+- music
+- custom xp
+- testing

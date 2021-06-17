@@ -1,6 +1,6 @@
-global.BaseEmbed = require("./Base/BaseEmbed.js")
-global.logger = require("./Base/logging.js")
-global.buildCommand = require("./Base/buildCommand.js")
+global.LyraCore = require("./LyraCore");
+
+const {baseEmbed, buildCommand, logging} = LyraCore;
 
 const {CommandoClient} = require('discord.js-commando');
 const path = require('path');

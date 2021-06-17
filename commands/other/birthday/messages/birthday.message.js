@@ -1,5 +1,7 @@
+const {baseEmbed} = LyraCore;
+
 module.exports = function (user) {
-    return BaseEmbed()
+    return baseEmbed()
         .setTitle(":tada: | Lyra's Birthday Wishes!")
         .setDescription(
             `Happy Birthday ${user}!

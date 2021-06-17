@@ -1,3 +1,5 @@
+const {buildCommand} = LyraCore;
+
 module.exports = buildCommand({
     run: require("./8ball"),
     name: '8ball',

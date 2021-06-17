@@ -1,5 +1,7 @@
+const {baseEmbed} = LyraCore;
+
 module.exports = function (question, answer) {
-    return BaseEmbed()
+    return baseEmbed()
         .setTitle(":8ball: | 8ball")
         .setDescription(
             `Q: ${question}
