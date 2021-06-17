@@ -14,8 +14,8 @@ module.exports = class PollCommand extends Command {
           prompt: 'What is the poll question?',
           type: 'string',
           validate: function validateQuestion(question) {
-            if (question.length < 101 && question.length > 11) return true;
-            return 'Polling questions must be between 10 and 100 characters in length.';
+            if (question.length <= 100 && question.length >= 1) return true;
+            return 'Polling questions must be between 1 and 100 characters in length.';
           }
         },
         {
@@ -33,8 +33,8 @@ module.exports = class PollCommand extends Command {
           prompt: 'How long should the poll last in minutes?',
           type: 'integer',
           validate: function validateTime(time) {
-            if (time >= 0 && time <= 60) return true;
-            return 'Polling time must be between 0 and 60.';
+            if (/^(0|[1-9]\d*s)$/.test(time) || /^(0|[1-9]\d*m)$/.test(time) || /^(0|[1-9]\d*h)$/.test(time)) return true;
+            return 'Polling time must be in the format of time<s/h/m>. ex: 1m for 1 minute';
           }
         }
       ]
