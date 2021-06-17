@@ -17,6 +17,8 @@
     "discord-xp": "^1.1.14",
     "discord.js": "^12.5.3",
     "discord.js-commando": "^0.12.3",
+    "lowdb": "^2.1.0",
+    "require-all": "^3.0.0",
     "winston": "^3.3.3"
   }
 }
