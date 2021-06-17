@@ -65,8 +65,6 @@ const filteredCommands = Object
     .values(commands)
     .filter((exp) => exp?.prototype instanceof Command)
 
-console.log(filteredCommands)
-
 client.registry.registerCommands(filteredCommands);
 
 

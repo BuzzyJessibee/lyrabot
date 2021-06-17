@@ -1,5 +1,5 @@
-module.exports = function (randobun) {
+module.exports = function (bunnyImageUrl) {
     return BaseEmbed()
         .setTitle("Bunnies! :rabbit2:")
-        .setImage(randobun)
+        .setImage(bunnyImageUrl)
 }
