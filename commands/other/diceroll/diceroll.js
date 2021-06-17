@@ -29,13 +29,13 @@ function formatDiceRoll(message, phrase, roll) {
         `Dice Rolled: ${number}d${type}\n`
 
     if (!modifier && number === 1)
-        return `${base}Modifier: ${modifier}\n\n**You've rolled a \`${result}\`!**`
+        return `${base}\n\n**You've rolled a \`${result}\`!**`
 
     else if (!modifier && number !== 1)
         return `${base}Modifier: ${modifier}\n\n**You've rolled \`${rolls}\`!\nYour total is: \`${result}\`!**`
 
     else if (modifier && number === 1)
-        return `${base}Modifier: ${modifier}\n\n**You've rolled a \`${result}\`!**`
+        return `${base}\n\n**You've rolled a \`${result}\`!**`
 
     else if (modifier && number !== 1)
         return `${base}Modifier: ${modifier}\n\nYou've rolled \`${rolls}\`!\nYour total is: \`${result}\`!**`
