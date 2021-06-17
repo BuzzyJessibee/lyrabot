@@ -10,9 +10,8 @@ module.exports = function ({run, ...commandOpts}) {
         }
 
         async run(message, args, fromPattern, result) {
-            return message.say(
-                await run(message, args)
-            );
+            await run(message, args);
+            return null;
         }
     }
 
