@@ -1,45 +1,43 @@
-const commando = require('discord.js-commando');
+const funPhrases = require("./funphrases.json")
+const diceRollMessage = require("./messages/diceroll.message")
+const Dice = require('dice-notation-js');
 
-class DiceRollCommand extends commando.Command {
-    constructor(client) {
-        super(client, {
-            name: 'roll',
-            group: 'fun',
-            memberName: 'roll',
-            description: 'Rolls a dice.',
-            args: [
-                {
-                    key: 'sides',
-                    prompt: 'Please enter a number of sides!',
-                    type: 'integer',
-                    default: 6
-                }
-            ]
-        });
-    }
+module.exports = async function (message, { dice }) {
 
-    async run (message, { sides }) {
+    let roll = Dice.detailed(dice)
 
+    var phrase = funPhrases[Math.floor(Math.random() * funPhrases.length)];
 
-        var roll = Math.floor(Math.random() * sides) + 1;
-        var phrases = [
-            '\"Hmm let\"s see now...\"',
-            '"Ooh! What\'d you get?"',
-            '\"And the magic dice say...\"',
-        ]
-        var wphrase = phrases[Math.floor(Math.random() * phrases.length)];
-        var reply = {
-            "embed": {
-              "title": ":game_die: | Lyra's Magic Dice!",
-              "footer": {
-                "text": "LyraBot - Made with ❤️ by Lyra Rose"
-              },
-              "description": wphrase + "\n\n**You've rolled a " + roll + "!" + "**",
-              "color": 3319968
-            }
-          }
-        message.say(reply);
-    }
+    let description = formatDiceRoll(message, phrase, roll);
+
+    await message.say(diceRollMessage(description));
+    
 }
 
-module.exports = DiceRollCommand;
+function formatDiceRoll(message, phrase, roll) {
+    console.log(roll)
+    const {
+        number,
+        type,
+        modifier,
+        rolls,
+        result
+    } = roll;
+
+    const base = `${phrase}\n\n` +
+        `Player: ${message.author.username}\n` +
+        `Dice Rolled: ${number}d${type}\n`
+
+    if (!modifier && number === 1)
+        return `${base}Modifier: ${modifier}\n\n**You've rolled a \`${result}\`!**`
+
+    else if (!modifier && number !== 1)
+        return `${base}Modifier: ${modifier}\n\n**You've rolled \`${rolls}\`!\nYour total is: \`${result}\`!**`
+
+    else if (modifier && number === 1)
+        return `${base}Modifier: ${modifier}\n\n**You've rolled a \`${result}\`!**`
+
+    else if (modifier && number !== 1)
+        return `${base}Modifier: ${modifier}\n\nYou've rolled \`${rolls}\`!\nYour total is: \`${result}\`!**`
+
+}
