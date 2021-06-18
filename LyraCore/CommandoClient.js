@@ -1,7 +1,8 @@
 const Path = require("path");
 const {CommandoClient, Command} = require("discord.js-commando");
+const log = LyraCore.logger("CommandoClient");
 
-module.exports = function (config) {
+module.exports = async function (config) {
     const client = new CommandoClient({
         commandPrefix: config.prefix,
     });
@@ -28,14 +29,16 @@ module.exports = function (config) {
         dirname: Path.resolve(config.commandDir),
     }))
 
-    //Load all exports in
+    //Load all exports in command directory, and filter only those that are Command instances.
     const filteredCommands = Object
         .values(commands)
         .filter((exp) => exp?.prototype instanceof Command)
 
     client.registry.registerCommands(filteredCommands);
 
-    client.login(config.token);
+    await client.login(config.token);
+
+    log(`>${client.user.tag}< is ready!`);
 
     return client
 }

@@ -1,6 +1,8 @@
 const Path = require("path");
 const fs = require("fs");
 
+const log = LyraCore.logger("Plugins")
+
 const importableExtensions = new Set(["js"]);
 
 function requireAll(dir) {
@@ -21,12 +23,13 @@ function requireAll(dir) {
 }
 
 
-module.exports = function loadPlugins(pluginApi) {
+module.exports = async function loadPlugins(pluginApi) {
     const plugins = requireAll("plugins");
 
     const loaded = {};
     for (const key in plugins) {
-        loaded[key] = plugins[key](pluginApi);
+        loaded[key] = await plugins[key](pluginApi);
+        log(`Loaded Plugin >${key}<`)
     }
 
     return loaded;
