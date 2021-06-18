@@ -1,6 +1,7 @@
 const Levels = require("discord-xp");
 
 module.exports = function ({Database, config, CommandoClient}) {
+    Levels.setDb(Database);
     // client.on("message", async (message) => {
     //     if (!message.guild) return;
     //     if (message.author.bot) return;
