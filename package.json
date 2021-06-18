@@ -10,15 +10,16 @@
   "license": "",
   "dependencies": {
     "@discordjs/opus": "^0.5.3",
+    "@types/lowdb": "^1.0.10",
     "canvacord": "^5.2.1",
     "dice-notation-js": "^1.0.3",
     "discord-music-player": "^7.1.4",
     "discord-paginationembed": "^2.1.0",
-    "discord-xp": "^1.1.14",
     "discord.js": "^12.5.3",
     "discord.js-commando": "^0.12.3",
-    "lowdb": "^2.1.0",
+    "lowdb": "^1.0.0",
     "require-all": "^3.0.0",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "discord-xp": "file:./lib/discord-xp"
   }
 }
