@@ -3,7 +3,7 @@ module.exports = async function ({CommandoClient}) {
 
     await CommandoClient.user.setActivity(...activity)
 
-    // setInterval(() => {
-    //     CommandoClient.user.setActivity(...activity)
-    // }, 10000);
+    setInterval(() => {
+        CommandoClient.user.setActivity(...activity)
+    }, 100000);
 }

@@ -27,6 +27,11 @@ if (!fs.existsSync("./config.json"))
     LC.plugins = await require("./LyraCore/plugins")(pluginAPI);
 
     console.log("=========LOAD COMPLETE===========");
+
+    await LC.plugins.levels.createUser("1234");
+    console.log(await LC.plugins.levels.appendXp("1234", "1234", 5000));
+    //LC.plugins.levels.deleteUser("1234", "12344");
+
 })()
 
 
