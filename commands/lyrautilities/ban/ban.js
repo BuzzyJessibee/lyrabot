@@ -6,8 +6,8 @@ module.exports = async function (message, { userToBan, reason, daysDelete }) {
   const user = message.mentions.members.first() || (await message.guild.members.fetch(userToBanID));
   if (user == undefined)
     return message.channel.send(':x: Please try again with a valid user.');
+  await user.send("https://tenor.com/view/when-your-team-too-good-ban-salt-bae-gif-7580925")
   user
-    .send("https://tenor.com/view/when-your-team-too-good-ban-salt-bae-gif-7580925")
     .ban({ days: daysDelete, reason: reason })
     .then(() => {
       message.say(banMessage(userToBan, reason));
