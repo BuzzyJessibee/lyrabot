@@ -7,8 +7,8 @@ module.exports = async function ({Database, CommandoClient}) {
         if (!message.guild) return;
         if (message.author.bot) return;
 
-        //const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
-        const randomAmountOfXp = 5000; // Min 1, Max 30
+        const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
+        //const randomAmountOfXp = 5000; // Min 1, Max 30
 
         const {guildLevel, userLevel} = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
 
