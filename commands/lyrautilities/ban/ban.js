@@ -17,8 +17,8 @@ module.exports = async function (message, {userToBan, reason, daysDelete}) {
         log(`Couldn't ban user >${user.user.username}<!`, "error");
     }
 
-    await user.ban({days: daysDelete, reason: reason});
     await user.send("https://tenor.com/view/when-your-team-too-good-ban-salt-bae-gif-7580925");
+    await user.ban({days: daysDelete, reason: reason});
     await message.say(banMessage(userToBan, reason));
 
 
