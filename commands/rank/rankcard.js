@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 const canvacord = require("canvacord");
-const Levels = require("discord-xp");
+//const Levels = require("discord-xp");
 
 class TestCommand extends commando.Command {
     constructor(client) {
@@ -20,7 +20,7 @@ class TestCommand extends commando.Command {
 
         let img = message.author.avatarURL({format: "jpg"});
         const bgimg = "wallpaper2.jpg"
-        
+
         const rank = new canvacord.Rank()
             .setAvatar(img)
             .setBackground("IMAGE", bgimg)
@@ -32,12 +32,12 @@ class TestCommand extends commando.Command {
             .setDiscriminator(message.author.discriminator)
             .setLevel(user.level)
             .setRank(1, '1', false);
-         
+
         rank.build()
             .then(data => {
                 const attachment = new Discord.MessageAttachment(data, "RankCard.png");
                 message.channel.send(attachment);
-            });     
+            });
     }
 }
 

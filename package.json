@@ -20,6 +20,6 @@
     "lowdb": "^1.0.0",
     "require-all": "^3.0.0",
     "winston": "^3.3.3",
-    "discord-xp": "file:./lib/discord-xp"
+    "discord-xp": "file:./lib"
   }
 }

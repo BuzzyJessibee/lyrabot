@@ -1,6 +1,4 @@
 const low = require("lowdb");
-const userModel = require("./models/user.model");
-
 
 let db;
 const k = "discordXp";
@@ -221,3 +219,12 @@ class DiscordXp {
 }
 
 module.exports = DiscordXp;
+
+
+function userModel() {
+    return {
+        totalXp: 0,
+        guildXp: {},
+        lastUpdate: 0,
+    }
+}

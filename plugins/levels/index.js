@@ -1,6 +1,6 @@
-const Levels = require("discord-xp");
+const Levels = require("./discord-xp");
 
-module.exports = async function ({Database, config, CommandoClient}) {
+module.exports = async function ({Database, CommandoClient}) {
     await Levels.setDb(Database);
 
     CommandoClient.on("message", async (message) => {
