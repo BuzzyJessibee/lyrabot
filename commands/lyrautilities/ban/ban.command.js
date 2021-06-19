@@ -12,10 +12,9 @@ module.exports = buildCommand({
     clientPermissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
     args: [
       {
-        key: 'userToBan',
-        prompt:
-          'Please mention the user you want to ban with @ or provide his ID.',
-        type: 'string'
+        key: 'user',
+        prompt: 'Please mention the user you want to ban with @.',
+        type: 'user'
       },
       {
         key: 'reason',
