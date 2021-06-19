@@ -1,7 +1,7 @@
 const log = LyraCore.logger("Guilds");
 
 module.exports = function ({CommandoClient}) {
-    CommandoClient.guilds.cache.forEach(guild => log(`Guild >${guild.name}< Connected!`));
+    CommandoClient.on("ready", () => CommandoClient.guilds.cache.forEach(guild => log(`Guild >${guild.name}< Connected!`)));
 
     CommandoClient.on("guildCreate", (g) => log(`${g.name} added LyraBot.`));
 
