@@ -11,6 +11,7 @@ if (!fs.existsSync("./config.json"))
 
     const config = require("./config.json");
 
+    LC.config = config;
     LC.logger = require("./LyraCore/logging");
     LC.baseEmbed = require("./LyraCore/BaseEmbed");
     LC.buildCommand = require("./LyraCore/buildCommand");
