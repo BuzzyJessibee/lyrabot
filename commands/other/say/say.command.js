@@ -2,6 +2,7 @@ const {buildCommand} = LyraCore;
 
 module.exports = buildCommand({
     run: require("./say"),
+    icon: ":speech_left:",
     name: 'say',
     aliases: ['make-me-say', 'print'],
     memberName: 'say',

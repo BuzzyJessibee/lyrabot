@@ -2,6 +2,7 @@ const {buildCommand} = LyraCore;
 
 module.exports = buildCommand({
     run: require("./ban"),
+    icon: ":hammer:",
     name: 'ban',
     aliases: ['ban-member', 'ban-hammer'],
     memberName: 'ban',

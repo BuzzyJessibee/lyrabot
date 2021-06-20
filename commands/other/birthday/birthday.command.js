@@ -2,6 +2,7 @@ const {buildCommand} = LyraCore;
 
 module.exports = buildCommand({
     run: require("./birthday"),
+    icon: ":cake:",
     name: 'birthday',
     group: 'fun',
     memberName: 'birthday',

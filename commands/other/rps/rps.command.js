@@ -2,6 +2,7 @@ const {buildCommand} = LyraCore;
 
 module.exports = buildCommand({
     run: require("./rps"),
+    icon: ":rock:",
     name: 'rps',
     aliases: ['rock-paper-scissors', 'rock'],
     group: 'fun',

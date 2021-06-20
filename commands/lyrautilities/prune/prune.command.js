@@ -2,6 +2,7 @@ const {buildCommand} = LyraCore;
 
 module.exports = buildCommand({
     run: require("./prune"),
+    icon: ":scissors:",
     name: 'prune',
     aliases: ['delete-messages', 'bulk-delete', 'purge'],
     description: 'Delete up to 99 recent messages. Only works within 14 days.',
@@ -17,4 +18,4 @@ module.exports = buildCommand({
         validate: deleteCount => deleteCount < 100 && deleteCount > 0
       }
     ]
-}); 
+});

@@ -2,6 +2,7 @@ const {buildCommand} = LyraCore;
 
 module.exports = buildCommand({
     run: require("./kick"),
+    icon: ":athletic_shoe:",
     name: 'kick',
     aliases: ['kick-member'],
     memberName: 'kick',

@@ -2,6 +2,7 @@ const {buildCommand} = LyraCore;
 
 module.exports = buildCommand({
     run: require("./8ball"),
+    icon: ":8ball:",
     name: '8ball',
     group: 'fun',
     memberName: '8ball',

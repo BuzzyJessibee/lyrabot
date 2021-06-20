@@ -2,6 +2,7 @@ const {buildCommand} = LyraCore;
 
 module.exports = buildCommand({
     run: require("./diceroll"),
+    icon: ":game_die:",
     name: 'roll',
     group: 'fun',
     memberName: 'roll',
