@@ -27,7 +27,7 @@ module.exports = async function (config) {
     //============= LOAD COMMANDS =============//
     const commands = flattenObject(require('require-all')({
         dirname: Path.resolve(config.commandDir),
-    }))
+    }));
 
     //Load all exports in command directory, and filter only those that are Command instances.
     const filteredCommands = Object

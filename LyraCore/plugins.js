@@ -31,6 +31,5 @@ module.exports = async function loadPlugins(pluginApi) {
         loaded[key] = await plugins[key](pluginApi);
         log(`Loaded Plugin >${key}<`)
     }
-
     return loaded;
 }
