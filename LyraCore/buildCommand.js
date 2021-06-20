@@ -1,13 +1,14 @@
 const commando = require("discord.js-commando");
 
 // Wraps command class creation to remove boilerplate.
-module.exports = function ({run, ...commandOpts}) {
+module.exports = function ({run, icon, ...commandOpts}) {
     const log = LyraCore.logger("Command Builder");
-
     log(`Building Command >${commandOpts.name}<`);
+
     const C = class extends commando.Command {
         constructor(client) {
             super(client, commandOpts);
+            this.icon = icon ?? ":blue_square:"
         }
 
         async run(message, args, fromPattern, result) {

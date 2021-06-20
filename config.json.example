@@ -2,5 +2,6 @@
   "prefix": "ly!",
   "token": "<DISCORD_BOT_TOKEN_HERE>",
   "databasePath": "./db.json",
-  "commandDir": "./commands"
+  "commandDir": "./commands",
+  "blockedCommandGroups": ["Utility"]
 }
