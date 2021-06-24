@@ -1,18 +1,14 @@
 const fs = require("fs");
 const Path = require("path");
 
-//================ PRE-LOAD CHECKS ================//
-if (!fs.existsSync("./config.json"))
-    throw new Error("Could not find >config.json<! Make sure you've renamed >config.json.example< to >config.json< and filled out its required fields!");
-
 //================ LOAD ================//
 (async () => {
     const LC = global.LyraCore = {};
+    LC.logger = require("./LyraCore/logging");
 
-    const config = require("./config.json");
+    const config = require("./LyraCore/readConfig")("./");
 
     LC.config = config;
-    LC.logger = require("./LyraCore/logging");
     LC.baseEmbed = require("./LyraCore/BaseEmbed");
     LC.buildCommand = require("./LyraCore/buildCommand");
 
