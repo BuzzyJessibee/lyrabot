@@ -1,6 +1,6 @@
 {
   "name": "lyrabot",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A piece of Lyra's Soul",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "@types/lowdb": "^1.0.10",
     "canvacord": "^5.2.1",
     "dice-notation-js": "^1.0.3",
-    "discord-music-player": "^7.1.4",
+    "discord-music-player": "^7.2.0",
     "discord-paginationembed": "^2.1.0",
     "discord.js": "^12.5.3",
     "discord.js-commando": "^0.12.3",
