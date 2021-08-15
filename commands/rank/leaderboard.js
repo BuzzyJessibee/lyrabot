@@ -36,6 +36,7 @@ class LBCommand extends commando.Command {
         //     lbEmbed.addField(lb[i], "=-=-=-=-=-=-=-=-=-=-=-=-=")
         // }
         // message.channel.send(lbEmbed);
+        await message.channel.send(":x: This command is currently disabled!")
     }
 }
 

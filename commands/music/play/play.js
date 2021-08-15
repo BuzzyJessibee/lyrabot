@@ -36,24 +36,55 @@ module.exports = async function (message, {query}) {
         }
 
     } else {
-        let song = await message.client.player.play(message, {
-            search: query,
-            requestedBy: message.author.tag
-        });
+        if(player.isPlaying(message)) {
+            let thesong = await message.client.player.play(message, {
+                search: query,
+                requestedBy: message.author.tag
+            });
 
-        if(song) {
-            console.log(`Playing ${song.name} in guild ${message.guild.name}`);
-            const videoEmbed = new MessageEmbed()
-                .setThumbnail(song.thumbnail)
-                .setColor('#32A8A0')
-                .addField(':notes: Now Playing:', song.name)
-                .addField(':stopwatch: Duration:', song.duration)
-                .setURL(song.url)
-                .setFooter(
-                    `Requested by ${song.queue.initMessage.author.username}!`,
-                    song.queue.initMessage.author.avatarURL()
-                );
-            return message.channel.send(videoEmbed);
-        }
+            let queue = message.client.player.getQueue(message);
+
+            if(queue) {
+                var mapQueue;
+                mapQueue = queue.songs.map((song, i) => {
+                    return `${song.name}`
+                }); 
+            }
+  
+            const addedEmbed = new MessageEmbed()
+            .setColor('#32A8A0')
+            .setTitle(`:musical_note: ${thesong.name}`)
+            .addField(
+                `Has been added to queue. `,
+                `This song is #${mapQueue.length} in queue`
+            )
+            .setThumbnail(thesong.thumbnail)
+            .setURL(thesong.url)
+            .setFooter(`LyraBot - Made with ❤️ by Lyra Rose`);
+
+            return message.channel.send(addedEmbed);
+
+        } else {
+        
+            let song = await message.client.player.play(message, {
+                search: query,
+                requestedBy: message.author.tag
+            });
+
+            if(song) {
+                console.log(`Playing ${song.name} in guild ${message.guild.name}`);
+                const videoEmbed = new MessageEmbed()
+                    .setThumbnail(song.thumbnail)
+                    .setColor('#32A8A0')
+                    .addField(':notes: Now Playing:', song.name)
+                    .addField(':stopwatch: Duration:', song.duration)
+                    .setURL(song.url)
+                    .setFooter(
+                        `Requested by ${song.queue.initMessage.author.username}!`,
+                        song.queue.initMessage.author.avatarURL()
+                    );
+                return message.channel.send(videoEmbed);
+            }
+    }
     }
 }

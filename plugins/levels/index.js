@@ -12,12 +12,12 @@ module.exports = async function ({Database, CommandoClient}) {
 
         const {guildLevel, userLevel} = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
 
-        if (userLevel && guildLevel)
+/*         if (userLevel && guildLevel)
             await message.channel.send(`${message.author}, congratulations! Your server level has increased to **${guildLevel}**, and your personal to **${userLevel}**! :tada:`);
         else if (userLevel)
             message.channel.send(`${message.author}, congratulations! Your personal level has increased to **${userLevel}**. :tada:`);
         else if (guildLevel)
-            message.channel.send(`${message.author}, congratulations! Your server level has increased to **${guildLevel}**. :tada:`);
+            message.channel.send(`${message.author}, congratulations! Your server level has increased to **${guildLevel}**. :tada:`); */
 
     });
 

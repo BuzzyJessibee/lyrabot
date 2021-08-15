@@ -214,8 +214,13 @@ class DiscordXp {
     }
 
     static async getUserGuildLevel(userId, guildId) {
-        return DiscordXp.levelFor(DiscordXp.getUserGuildLevel(userId, guildId));
+        return DiscordXp.levelFor(DiscordXp.getUserGuildXp(userId, guildId));
     }
+
+    static async getXpToNextUserGuildLevel(userId, guildId) {
+        return DiscordXp.xpFor((await DiscordXp.getUserGuildLevel(userId, guildId) || 0) + 1) - await DiscordXp.getUserGuildXp(userId, guildId);
+    }
+
 }
 
 module.exports = DiscordXp;

@@ -13,6 +13,7 @@ module.exports = async function (config) {
         leaveOnEnd: true,
         leaveOnStop: true,
         leaveOnEmpty: true,
+        deafenOnJoin: true,
         timeout: 0,
         volume: 150,
         quality: 'high',
@@ -25,21 +26,12 @@ module.exports = async function (config) {
         // Emitted when channel was empty.
         .on('channelEmpty',  (message, queue) =>
             message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle(`The channel is empty, I have stopped the music`)))
-        // Emitted when a song was added to the queue.
-        .on('songAdd',  (message, queue, song) =>
-            message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle(song.name+' has been added to the queue')))
-        // Emitted when a playlist was added to the queue.
-        .on('playlistAdd',  (message, queue, playlist) =>
-            message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle(`Added a playlist with ${playlist.videoCount} songs!`)))
         // Emitted when there was no more music to play.
         .on('queueEnd',  (message, queue) =>
             message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle('The queue has ended!')))
         // Emitted when a song changed.
         .on('songChanged', (message, newSong, oldSong) =>
             message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle(newSong.name+' is now playing!')))
-        // Emitted when a first song in the queue started playing (after play method).
-        .on('songFirst',  (message, song) =>
-            message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle(song.name+' is now playing!')))
         // Emitted when someone disconnected the bot from the channel.
         .on('clientDisconnect', (message, queue) =>
             message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle('I was disconnected!')))
@@ -119,7 +111,7 @@ module.exports = async function (config) {
                 default:
                     var exampleEmbed = new Discord.MessageEmbed()
                         .setColor('#0099ff')
-                        .setTitle('Oops! Unknown Error.');
+                        .setTitle('Oops! Unknown Error. (Video is probably age-restricted)');
                     message.channel.send(exampleEmbed);
                     break;
             }
