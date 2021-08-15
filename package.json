@@ -4,7 +4,7 @@
   "description": "A piece of Lyra's Soul",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Lyrasaurus Rose",
   "license": "",
@@ -17,8 +17,10 @@
     "discord-paginationembed": "^2.1.0",
     "discord.js": "^12.5.3",
     "discord.js-commando": "^0.12.3",
+    "jest": "^27.0.6",
     "lowdb": "^1.0.0",
     "require-all": "^3.0.0",
+    "tempy": "^1.0.1",
     "winston": "^3.3.3"
   }
 }

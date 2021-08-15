@@ -15,6 +15,7 @@ const Path = require("path");
     const Database = await require("./LyraCore/Database")(config);
     const CommandoClient = await require("./LyraCore/CommandoClient")(config);
 
+    //Create an API for plugins to use. This object is passed to each loaded plugin
     const pluginAPI = {
         config,
         Database,
@@ -25,7 +26,7 @@ const Path = require("path");
 
     console.log("=========LOAD COMPLETE===========");
 
-})()
+})();
 
 
 
