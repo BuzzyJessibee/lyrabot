@@ -65,6 +65,18 @@ module.exports = async function (message, {query}) {
             return message.channel.send(addedEmbed);
 
         } else {
+
+            if (
+                // Handles Shortened Links
+                query.match(
+                    /^(?!.*\?.*\bv=)https:\/\/((w){3}.|)youtu\.be\/.*$/
+                )
+            ) {
+                let queryarray = query.split("/")
+                let videoID = queryarray[3]
+
+                query = "https://youtube.com/watch?v=" + videoID
+            }
         
             let song = await message.client.player.play(message, {
                 search: query,
