@@ -7,4 +7,4 @@ This bot was written with Discord.js v13 + @discordjs/voice
 
 This bot was created for fun for me to learn Node JavaScript and just has a bunch of random features that I thought were cool.
 
-Previous DJS v12 iteration can be found in the branch lyrabot-v3
+### Previous DJS v12 iteration can be found in the branch lyrabot-v3
