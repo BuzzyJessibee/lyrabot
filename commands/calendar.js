@@ -1,6 +1,9 @@
 const baseEmbed = require('../baseEmbed');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
+// Calendar command based off of a C++ program that I wrote. Uses the doomsday formula to find the first day of the month.
+// See: https://en.wikipedia.org/wiki/Doomsday_rule
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('calendar')
