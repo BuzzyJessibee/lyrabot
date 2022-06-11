@@ -2,14 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('remove')
-    .setDescription('Remove a song from the queue')
-    .addIntegerOption((option) =>
-      option
-        .setName('songnumber')
-        .setDescription('Track number of the song to delete')
-        .setRequired(true)
-    ),
+    .setName('nightcore')
+    .setDescription('Toggle the -nightcore- filter'),
 
   async execute(interaction) {
     if (!interaction.member.voice.channelId)
@@ -27,17 +21,23 @@ module.exports = {
         ephemeral: true,
       });
     await interaction.deferReply();
-    const songID = interaction.options.getInteger('songnumber');
     const queue = interaction.client.player.getQueue(interaction.guildId);
     if (!queue || !queue.playing)
       return void interaction.followUp({
         content: '❌ | No music is being played!',
       });
-    const success = queue.remove(songID - 1);
-    return void interaction.followUp({
-      content: success
-        ? `✅ | Removed track **${songID}** | **${success.title}** from the queue!`
-        : '❌ | Something went wrong!',
+    await queue.setFilters({
+      nightcore: !queue.getFiltersEnabled().includes('nightcore'),
     });
+
+    setTimeout(() => {
+      return void interaction.followUp({
+        content: `🎵 | 𝓷𝓲𝓰𝓱𝓽𝓬𝓸𝓻𝓮 filter ${
+          queue.getFiltersEnabled().includes('nightcore')
+            ? 'Enabled'
+            : 'Disabled'
+        }!`,
+      });
+    }, queue.options.bufferingTimeout);
   },
 };

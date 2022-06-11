@@ -7,13 +7,32 @@ module.exports = {
     .setDescription('See what is currently playing'),
 
   async execute(interaction) {
+    if (!interaction.member.voice.channelId)
+      return await interaction.reply({
+        content: 'You are not in a voice channel!',
+        ephemeral: true,
+      });
+    if (
+      interaction.guild.me.voice.channelId &&
+      interaction.member.voice.channelId !==
+        interaction.guild.me.voice.channelId
+    )
+      return await interaction.reply({
+        content: 'You are not in my voice channel!',
+        ephemeral: true,
+      });
     await interaction.deferReply();
     let queue = interaction.client.player.getQueue(interaction.guildId);
 
-    const video = queue.nowPlaying;
+    if (queue == undefined) {
+      interaction.followUp(':x: | No music is being played!');
+      return;
+    }
+
+    const video = queue.current;
     let description = playbackBar(queue, video);
 
-    const title = video.name;
+    const title = video.title;
 
     const videoEmbed = baseEmbed()
       .setThumbnail(video.thumbnail)
@@ -26,7 +45,7 @@ module.exports = {
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     function playbackBar(queue, video) {
       let progress = queue.createProgressBar();
-      let timecodes = progress.times.split('/');
+      let timecodes = progress.split(' ');
       let rawTimePassed = timecodes[0].split(':');
       let passedTimeInMS = 0;
 
@@ -49,20 +68,8 @@ module.exports = {
       const passedTimeFormatted = formatDuration(passedTimeInMSObj);
 
       const totalDurationFormatted = video.duration;
-      let totalDurationInMS = 0;
-      let rawDuration = video.duration.split(':');
+      let totalDurationInMS = video.durationMS;
 
-      if (rawDuration.length == 1) {
-        totalDurationInMS = Number(rawDuration[0]) * 1000;
-      } else if (rawDuration.length == 2) {
-        totalDurationInMS =
-          Number(rawDuration[0]) * 60000 + Number(rawDuration[1]) * 1000;
-      } else if (rawDuration.length == 3) {
-        totalDurationInMS =
-          Number(rawDuration[0]) * 3600000 +
-          Number(rawDuration[1]) * 60000 +
-          Number(rawDuration[2]) * 1000;
-      }
       const playBackBarLocation = Math.round(
         (passedTimeInMS / totalDurationInMS) * 10
       );

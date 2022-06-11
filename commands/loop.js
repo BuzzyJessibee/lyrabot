@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { RepeatMode } = require('discord-music-player');
+const { QueueRepeatMode } = require('discord-player');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -10,16 +10,16 @@ module.exports = {
         .setName('mode')
         .setDescription('Loop type')
         .setRequired(true)
-        .addChoice('Track', RepeatMode.SONG)
-        .addChoice('Queue', RepeatMode.QUEUE)
-        .addChoice('Off', RepeatMode.DISABLED)
+        .addChoice('Track', QueueRepeatMode.TRACK)
+        .addChoice('Queue', QueueRepeatMode.QUEUE)
+        .addChoice('Off', QueueRepeatMode.OFF)
     ),
 
   async execute(interaction) {
     await interaction.deferReply();
     const queue = interaction.client.player.getQueue(interaction.guildId);
 
-    if (!queue || !queue.isPlaying)
+    if (!queue || !queue.playing)
       return void interaction.followUp({
         content: '❌ | No music is being played!',
       });
@@ -28,9 +28,9 @@ module.exports = {
 
     const success = queue.setRepeatMode(loopMode);
     const mode =
-      loopMode === RepeatMode.SONG
+      loopMode === QueueRepeatMode.TRACK
         ? '🔂'
-        : loopMode === RepeatMode.QUEUE
+        : loopMode === QueueRepeatMode.QUEUE
         ? '🔁'
         : '▶';
     return void interaction.followUp({

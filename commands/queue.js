@@ -6,16 +6,30 @@ module.exports = {
     .setDescription('View the queue'),
 
   async execute(interaction) {
+    if (!interaction.member.voice.channelId)
+      return await interaction.reply({
+        content: 'You are not in a voice channel!',
+        ephemeral: true,
+      });
+    if (
+      interaction.guild.me.voice.channelId &&
+      interaction.member.voice.channelId !==
+        interaction.guild.me.voice.channelId
+    )
+      return await interaction.reply({
+        content: 'You are not in my voice channel!',
+        ephemeral: true,
+      });
     await interaction.deferReply();
     const queue = interaction.client.player.getQueue(interaction.guildId);
-    if (!queue || !queue.isPlaying)
+    if (!queue || !queue.playing)
       return void interaction.followUp({
         content: '❌ | No music is being played!',
       });
 
-    const currentTrack = queue.nowPlaying;
-    const tracks = queue.songs.slice(1, 11).map((m, i) => {
-      return `${i + 1}. **${m.name}** ([link](${m.url}))`;
+    const currentTrack = queue.current;
+    const tracks = queue.tracks.slice(0, 10).map((m, i) => {
+      return `${i + 1}. **${m.title}** ([link](${m.url}))`;
     });
 
     return void interaction.followUp({
@@ -23,11 +37,11 @@ module.exports = {
         {
           title: 'Server Queue',
           description: `${tracks.join('\n')}${
-            queue.songs.length > tracks.length
+            queue.tracks.length > tracks.length
               ? `\n...${
-                  queue.songs.length - tracks.length === 1
-                    ? `${queue.songs.length - tracks.length - 1} more track`
-                    : `${queue.songs.length - tracks.length - 1} more tracks`
+                  queue.tracks.length - tracks.length === 1
+                    ? `${queue.tracks.length - tracks.length} more track`
+                    : `${queue.tracks.length - tracks.length} more tracks`
                 }`
               : ''
           }`,
@@ -35,7 +49,7 @@ module.exports = {
           fields: [
             {
               name: 'Now Playing',
-              value: `🎶 | **${currentTrack.name}** ([link](${currentTrack.url}))`,
+              value: `🎶 | **${currentTrack.title}** ([link](${currentTrack.url}))`,
             },
           ],
         },
