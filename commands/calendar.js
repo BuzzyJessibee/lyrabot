@@ -1,9 +1,6 @@
 const baseEmbed = require('../baseEmbed');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
-// Calendar command based off of a C++ program that I wrote. Uses the doomsday formula to find the first day of the month.
-// See: https://en.wikipedia.org/wiki/Doomsday_rule
-
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('calendar')
@@ -21,32 +18,33 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
+    await interaction.deferReply(); // give us time for calculations
     if (
       // Is the month valid? Jan-Dec?
       interaction.options.getInteger('month') <= 0 ||
       interaction.options.getInteger('month') > 12
     ) {
-      interaction.reply(
+      interaction.followUp(
         `:x: | Sorry! The month you entered \`${interaction.options.getInteger(
           'month'
         )}\` is invalid!`
       );
+      return;
     }
 
     if (interaction.options.getInteger('year') < 1753) {
       // Doomsday formula only works with year 1753 or after
-      interaction.reply(
+      interaction.followUp(
         `:x: | Sorry! The year you entered \`${interaction.options.getInteger(
           'year'
         )}\` is invalid! It must be \`1753\` or later!`
       );
+      return;
     }
 
     // grab the month and year from the user input
     let month = interaction.options.getInteger('month');
     let year = interaction.options.getInteger('year');
-
-    await interaction.deferReply(); // give us time for calculations
 
     let header = displayHeader(month, year);
     let offset = computeOffset(month, year);
